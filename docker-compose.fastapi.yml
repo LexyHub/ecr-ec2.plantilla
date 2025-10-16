@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  fastapi_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    container_name: fastapi_test
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./FastApi:/app
+      - ./.env:/app/.env
+    env_file: .env
+    command: uvicorn fastapi_test:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - lexy_net
+
+networks:
+  lexy_net:
+    driver: bridge

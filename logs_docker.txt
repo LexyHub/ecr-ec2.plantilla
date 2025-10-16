@@ -1,0 +1,317 @@
+redis            | 2025-10-16 12:32:54.267 | 1:C 16 Oct 2025 15:32:54.267 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis            | 2025-10-16 12:32:54.267 | 1:C 16 Oct 2025 15:32:54.267 # Redis version=6.2.20, bits=64, commit=00000000, modified=0, pid=1, just started
+redis            | 2025-10-16 12:32:54.267 | 1:C 16 Oct 2025 15:32:54.267 # Configuration loaded
+redis            | 2025-10-16 12:32:54.268 | 1:M 16 Oct 2025 15:32:54.268 * monotonic clock: POSIX clock_gettime
+redis            | 2025-10-16 12:32:54.273 | 1:M 16 Oct 2025 15:32:54.272 * Running mode=standalone, port=6379.
+redis            | 2025-10-16 12:32:54.273 | 1:M 16 Oct 2025 15:32:54.273 # Server initialized
+redis            | 2025-10-16 12:32:54.275 | 1:M 16 Oct 2025 15:32:54.274 * Ready to accept connections
+fastapi_test     | 2025-10-16 12:32:55.339 | INFO:     Will watch for changes in these directories: ['/app']
+fastapi_test     | 2025-10-16 12:32:55.340 | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+fastapi_test     | 2025-10-16 12:32:55.340 | INFO:     Started reloader process [1] using WatchFiles
+fastapi_test     | 2025-10-16 12:32:57.715 | INFO:     Started server process [8]
+fastapi_test     | 2025-10-16 12:32:57.715 | INFO:     Waiting for application startup.
+fastapi_test     | 2025-10-16 12:32:57.715 | INFO:     Application startup complete.
+rabbitmq         | 2025-10-16 12:33:03.323 | 2025-10-16 15:33:03.307541+00:00 [notice] <0.44.0> Application syslog exited with reason: stopped
+rabbitmq         | 2025-10-16 12:33:03.323 | 2025-10-16 15:33:03.323133+00:00 [notice] <0.230.0> Logging: switching to configured handler(s); following messages may not be visible in this log output
+rabbitmq         | 2025-10-16 12:33:03.367 | 2025-10-16 15:33:03.366936+00:00 [notice] <0.230.0> Logging: configured log handlers are now ACTIVE
+rabbitmq         | 2025-10-16 12:33:03.856 | 2025-10-16 15:33:03.855417+00:00 [info] <0.230.0> ra: starting system quorum_queues
+rabbitmq         | 2025-10-16 12:33:03.856 | 2025-10-16 15:33:03.855627+00:00 [info] <0.230.0> starting Ra system: quorum_queues in directory: /var/lib/rabbitmq/mnesia/rabbit@5144693017bb/quorum/rabbit@5144693017bb
+rabbitmq         | 2025-10-16 12:33:04.020 | 2025-10-16 15:33:04.020073+00:00 [info] <0.266.0> ra system 'quorum_queues' running pre init for 0 registered servers
+rabbitmq         | 2025-10-16 12:33:04.049 | 2025-10-16 15:33:04.049132+00:00 [info] <0.267.0> ra: meta data store initialised for system quorum_queues. 0 record(s) recovered
+rabbitmq         | 2025-10-16 12:33:04.089 | 2025-10-16 15:33:04.088734+00:00 [notice] <0.272.0> WAL: ra_log_wal init, open tbls: ra_log_open_mem_tables, closed tbls: ra_log_closed_mem_tables
+rabbitmq         | 2025-10-16 12:33:04.114 | 2025-10-16 15:33:04.113805+00:00 [info] <0.230.0> ra: starting system coordination
+rabbitmq         | 2025-10-16 12:33:04.114 | 2025-10-16 15:33:04.113920+00:00 [info] <0.230.0> starting Ra system: coordination in directory: /var/lib/rabbitmq/mnesia/rabbit@5144693017bb/coordination/rabbit@5144693017bb
+rabbitmq         | 2025-10-16 12:33:04.121 | 2025-10-16 15:33:04.120820+00:00 [info] <0.279.0> ra system 'coordination' running pre init for 0 registered servers
+rabbitmq         | 2025-10-16 12:33:04.124 | 2025-10-16 15:33:04.123392+00:00 [info] <0.280.0> ra: meta data store initialised for system coordination. 0 record(s) recovered
+rabbitmq         | 2025-10-16 12:33:04.124 | 2025-10-16 15:33:04.123729+00:00 [notice] <0.285.0> WAL: ra_coordination_log_wal init, open tbls: ra_coordination_log_open_mem_tables, closed tbls: ra_coordination_log_closed_mem_tables
+rabbitmq         | 2025-10-16 12:33:04.139 | 2025-10-16 15:33:04.138493+00:00 [info] <0.230.0> 
+rabbitmq         | 2025-10-16 12:33:04.139 | 2025-10-16 15:33:04.138493+00:00 [info] <0.230.0>  Starting RabbitMQ 3.11.28 on Erlang 25.3.2.9 [jit]
+rabbitmq         | 2025-10-16 12:33:04.139 | 2025-10-16 15:33:04.138493+00:00 [info] <0.230.0>  Copyright (c) 2007-2023 Broadcom Inc and/or its subsidiaries
+rabbitmq         | 2025-10-16 12:33:04.139 | 2025-10-16 15:33:04.138493+00:00 [info] <0.230.0>  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.141 |   ##  ##      RabbitMQ 3.11.28
+rabbitmq         | 2025-10-16 12:33:04.141 |   ##  ##
+rabbitmq         | 2025-10-16 12:33:04.141 |   ##########  Copyright (c) 2007-2023 Broadcom Inc and/or its subsidiaries
+rabbitmq         | 2025-10-16 12:33:04.141 |   ######  ##
+rabbitmq         | 2025-10-16 12:33:04.141 |   ##########  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.141 |   Erlang:      25.3.2.9 [jit]
+rabbitmq         | 2025-10-16 12:33:04.141 |   TLS Library: OpenSSL - OpenSSL 3.1.5 30 Jan 2024
+rabbitmq         | 2025-10-16 12:33:04.141 |   Release series support status: supported
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.141 |   Doc guides:  https://rabbitmq.com/documentation.html
+rabbitmq         | 2025-10-16 12:33:04.141 |   Support:     https://rabbitmq.com/contact.html
+rabbitmq         | 2025-10-16 12:33:04.141 |   Tutorials:   https://rabbitmq.com/getstarted.html
+rabbitmq         | 2025-10-16 12:33:04.141 |   Monitoring:  https://rabbitmq.com/monitoring.html
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.141 |   Logs: /var/log/rabbitmq/rabbit@5144693017bb_upgrade.log
+rabbitmq         | 2025-10-16 12:33:04.141 |         <stdout>
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.141 |   Config file(s): /etc/rabbitmq/conf.d/10-defaults.conf
+rabbitmq         | 2025-10-16 12:33:04.141 | 
+rabbitmq         | 2025-10-16 12:33:04.142 |   Starting broker...2025-10-16 15:33:04.141821+00:00 [info] <0.230.0> 
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  node           : rabbit@5144693017bb
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  home dir       : /var/lib/rabbitmq
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  config file(s) : /etc/rabbitmq/conf.d/10-defaults.conf
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  cookie hash    : NgjEQ+S5lLtr2JRz6oZX7w==
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  log(s)         : /var/log/rabbitmq/rabbit@5144693017bb_upgrade.log
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>                 : <stdout>
+rabbitmq         | 2025-10-16 12:33:04.142 | 2025-10-16 15:33:04.141821+00:00 [info] <0.230.0>  database dir   : /var/lib/rabbitmq/mnesia/rabbit@5144693017bb
+rabbitmq         | 2025-10-16 12:33:11.842 | 2025-10-16 15:33:11.841789+00:00 [info] <0.230.0> Running boot step pre_boot defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.843 | 2025-10-16 15:33:11.841984+00:00 [info] <0.230.0> Running boot step rabbit_global_counters defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.843 | 2025-10-16 15:33:11.842757+00:00 [info] <0.230.0> Running boot step rabbit_osiris_metrics defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.849 | 2025-10-16 15:33:11.843068+00:00 [info] <0.230.0> Running boot step rabbit_core_metrics defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.851 | 2025-10-16 15:33:11.848655+00:00 [info] <0.230.0> Running boot step rabbit_alarm defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.864 | 2025-10-16 15:33:11.863630+00:00 [info] <0.300.0> Memory high watermark set to 3046 MiB (3194047692 bytes) of 7615 MiB (7985119232 bytes) total
+rabbitmq         | 2025-10-16 12:33:11.874 | 2025-10-16 15:33:11.873579+00:00 [info] <0.302.0> Enabling free disk space monitoring (disk free space: 1022602067968, total memory: 7985119232)
+rabbitmq         | 2025-10-16 12:33:11.874 | 2025-10-16 15:33:11.873689+00:00 [info] <0.302.0> Disk free limit set to 50MB
+rabbitmq         | 2025-10-16 12:33:11.879 | 2025-10-16 15:33:11.878633+00:00 [info] <0.230.0> Running boot step code_server_cache defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.879 | 2025-10-16 15:33:11.878834+00:00 [info] <0.230.0> Running boot step file_handle_cache defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.879 | 2025-10-16 15:33:11.879342+00:00 [info] <0.305.0> Limiting to approx 1048479 file handles (943629 sockets)
+rabbitmq         | 2025-10-16 12:33:11.880 | 2025-10-16 15:33:11.879600+00:00 [info] <0.306.0> FHC read buffering: OFF
+rabbitmq         | 2025-10-16 12:33:11.880 | 2025-10-16 15:33:11.879687+00:00 [info] <0.306.0> FHC write buffering: ON
+rabbitmq         | 2025-10-16 12:33:11.881 | 2025-10-16 15:33:11.881249+00:00 [info] <0.230.0> Running boot step worker_pool defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.882 | 2025-10-16 15:33:11.881373+00:00 [info] <0.287.0> Will use 12 processes for default worker pool
+rabbitmq         | 2025-10-16 12:33:11.882 | 2025-10-16 15:33:11.881453+00:00 [info] <0.287.0> Starting worker pool 'worker_pool' with 12 processes in it
+rabbitmq         | 2025-10-16 12:33:11.883 | 2025-10-16 15:33:11.882723+00:00 [info] <0.230.0> Running boot step database defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:11.884 | 2025-10-16 15:33:11.884357+00:00 [info] <0.230.0> Node database directory at /var/lib/rabbitmq/mnesia/rabbit@5144693017bb is empty. Assuming we need to join an existing cluster or initialise from scratch...
+rabbitmq         | 2025-10-16 12:33:11.885 | 2025-10-16 15:33:11.884554+00:00 [info] <0.230.0> Configured peer discovery backend: rabbit_peer_discovery_classic_config
+rabbitmq         | 2025-10-16 12:33:11.885 | 2025-10-16 15:33:11.884688+00:00 [info] <0.230.0> Will try to lock with peer discovery backend rabbit_peer_discovery_classic_config
+rabbitmq         | 2025-10-16 12:33:11.885 | 2025-10-16 15:33:11.884883+00:00 [info] <0.230.0> All discovered existing cluster peers:
+rabbitmq         | 2025-10-16 12:33:11.885 | 2025-10-16 15:33:11.884964+00:00 [info] <0.230.0> Discovered no peer nodes to cluster with. Some discovery backends can filter nodes out based on a readiness criteria. Enabling debug logging might help troubleshoot.
+rabbitmq         | 2025-10-16 12:33:11.889 | 2025-10-16 15:33:11.889232+00:00 [notice] <0.44.0> Application mnesia exited with reason: stopped
+rabbitmq         | 2025-10-16 12:33:12.328 | 2025-10-16 15:33:12.327639+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq         | 2025-10-16 12:33:12.328 | 2025-10-16 15:33:12.327910+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq         | 2025-10-16 12:33:12.356 | 2025-10-16 15:33:12.353293+00:00 [info] <0.230.0> Feature flags: `feature_flags_v2`: supported, attempt to enable...
+rabbitmq         | 2025-10-16 12:33:12.429 | 2025-10-16 15:33:12.428772+00:00 [notice] <0.288.0> Feature flags: attempt to enable `classic_mirrored_queue_version`...
+rabbitmq         | 2025-10-16 12:33:12.564 | 2025-10-16 15:33:12.563984+00:00 [notice] <0.288.0> Feature flags: `classic_mirrored_queue_version` enabled
+rabbitmq         | 2025-10-16 12:33:12.565 | 2025-10-16 15:33:12.565302+00:00 [notice] <0.288.0> Feature flags: attempt to enable `classic_queue_type_delivery_support`...
+rabbitmq         | 2025-10-16 12:33:12.611 | 2025-10-16 15:33:12.610274+00:00 [notice] <0.288.0> Feature flags: attempt to enable `stream_queue`...
+rabbitmq         | 2025-10-16 12:33:12.683 | 2025-10-16 15:33:12.682377+00:00 [notice] <0.288.0> Feature flags: `stream_queue` enabled
+rabbitmq         | 2025-10-16 12:33:12.710 | 2025-10-16 15:33:12.709541+00:00 [notice] <0.288.0> Feature flags: `classic_queue_type_delivery_support` enabled
+rabbitmq         | 2025-10-16 12:33:12.712 | 2025-10-16 15:33:12.710659+00:00 [notice] <0.288.0> Feature flags: attempt to enable `direct_exchange_routing_v2`...
+rabbitmq         | 2025-10-16 12:33:12.732 | 2025-10-16 15:33:12.731566+00:00 [info] <0.507.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq         | 2025-10-16 12:33:12.732 | 2025-10-16 15:33:12.731877+00:00 [info] <0.507.0> Successfully synced tables from a peer
+rabbitmq         | 2025-10-16 12:33:12.774 | 2025-10-16 15:33:12.773413+00:00 [notice] <0.288.0> Feature flags: `direct_exchange_routing_v2` enabled
+rabbitmq         | 2025-10-16 12:33:12.775 | 2025-10-16 15:33:12.775005+00:00 [notice] <0.288.0> Feature flags: attempt to enable `drop_unroutable_metric`...
+rabbitmq         | 2025-10-16 12:33:12.824 | 2025-10-16 15:33:12.824047+00:00 [notice] <0.288.0> Feature flags: `drop_unroutable_metric` enabled
+rabbitmq         | 2025-10-16 12:33:12.825 | 2025-10-16 15:33:12.825369+00:00 [notice] <0.288.0> Feature flags: attempt to enable `empty_basic_get_metric`...
+rabbitmq         | 2025-10-16 12:33:12.875 | 2025-10-16 15:33:12.874747+00:00 [notice] <0.288.0> Feature flags: `empty_basic_get_metric` enabled
+rabbitmq         | 2025-10-16 12:33:12.877 | 2025-10-16 15:33:12.876925+00:00 [notice] <0.288.0> Feature flags: attempt to enable `listener_records_in_ets`...
+rabbitmq         | 2025-10-16 12:33:12.986 | 2025-10-16 15:33:12.985736+00:00 [notice] <0.288.0> Feature flags: `listener_records_in_ets` enabled
+rabbitmq         | 2025-10-16 12:33:12.989 | 2025-10-16 15:33:12.988825+00:00 [notice] <0.288.0> Feature flags: attempt to enable `stream_sac_coordinator_unblock_group`...
+rabbitmq         | 2025-10-16 12:33:13.010 | 2025-10-16 15:33:13.010076+00:00 [notice] <0.288.0> Feature flags: attempt to enable `stream_single_active_consumer`...
+rabbitmq         | 2025-10-16 12:33:13.059 | 2025-10-16 15:33:13.058788+00:00 [notice] <0.288.0> Feature flags: `stream_single_active_consumer` enabled
+rabbitmq         | 2025-10-16 12:33:13.080 | 2025-10-16 15:33:13.079818+00:00 [notice] <0.288.0> Feature flags: `stream_sac_coordinator_unblock_group` enabled
+rabbitmq         | 2025-10-16 12:33:13.082 | 2025-10-16 15:33:13.081537+00:00 [notice] <0.288.0> Feature flags: attempt to enable `tracking_records_in_ets`...
+rabbitmq         | 2025-10-16 12:33:13.127 | 2025-10-16 15:33:13.126503+00:00 [notice] <0.288.0> Feature flags: `tracking_records_in_ets` enabled
+rabbitmq         | 2025-10-16 12:33:13.128 | 2025-10-16 15:33:13.128079+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq         | 2025-10-16 12:33:13.129 | 2025-10-16 15:33:13.128324+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq         | 2025-10-16 12:33:13.163 | 2025-10-16 15:33:13.162829+00:00 [info] <0.230.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+rabbitmq         | 2025-10-16 12:33:13.163 | 2025-10-16 15:33:13.163036+00:00 [info] <0.230.0> Successfully synced tables from a peer
+rabbitmq         | 2025-10-16 12:33:13.163 | 2025-10-16 15:33:13.163077+00:00 [info] <0.230.0> Peer discovery backend rabbit_peer_discovery_classic_config does not support registration, skipping registration.
+rabbitmq         | 2025-10-16 12:33:13.163 | 2025-10-16 15:33:13.163192+00:00 [info] <0.230.0> Will try to unlock with peer discovery backend rabbit_peer_discovery_classic_config
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.163459+00:00 [info] <0.230.0> Running boot step tracking_metadata_store defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.163616+00:00 [info] <0.640.0> Setting up a table for connection tracking on this node: tracked_connection
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.163782+00:00 [info] <0.640.0> Setting up a table for per-vhost connection counting on this node: tracked_connection_per_vhost
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.163983+00:00 [info] <0.640.0> Setting up a table for per-user connection counting on this node: tracked_connection_per_user
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.164085+00:00 [info] <0.640.0> Setting up a table for channel tracking on this node: tracked_channel
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.164293+00:00 [info] <0.640.0> Setting up a table for channel tracking on this node: tracked_channel_per_user
+rabbitmq         | 2025-10-16 12:33:13.164 | 2025-10-16 15:33:13.164407+00:00 [info] <0.230.0> Running boot step networking_metadata_store defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.165 | 2025-10-16 15:33:13.164545+00:00 [info] <0.230.0> Running boot step database_sync defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.165 | 2025-10-16 15:33:13.164845+00:00 [info] <0.230.0> Running boot step feature_flags defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.165 | 2025-10-16 15:33:13.165280+00:00 [info] <0.230.0> Running boot step codec_correctness_check defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.165 | 2025-10-16 15:33:13.165398+00:00 [info] <0.230.0> Running boot step external_infrastructure defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.165 | 2025-10-16 15:33:13.165466+00:00 [info] <0.230.0> Running boot step rabbit_event defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.166 | 2025-10-16 15:33:13.165805+00:00 [info] <0.230.0> Running boot step rabbit_registry defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.167 | 2025-10-16 15:33:13.165999+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_amqplain defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.167 | 2025-10-16 15:33:13.166129+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_cr_demo defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.167 | 2025-10-16 15:33:13.166297+00:00 [info] <0.230.0> Running boot step rabbit_auth_mechanism_plain defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.167 | 2025-10-16 15:33:13.166414+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_direct defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.168 | 2025-10-16 15:33:13.166577+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_fanout defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.168 | 2025-10-16 15:33:13.166699+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_headers defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.168 | 2025-10-16 15:33:13.166832+00:00 [info] <0.230.0> Running boot step rabbit_exchange_type_topic defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.168 | 2025-10-16 15:33:13.167920+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_all defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168107+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_exactly defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168243+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_mode_nodes defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168364+00:00 [info] <0.230.0> Running boot step rabbit_priority_queue defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168427+00:00 [info] <0.230.0> Priority queues enabled, real BQ is rabbit_variable_queue
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168680+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_client_local defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.169 | 2025-10-16 15:33:13.168904+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_min_masters defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.170 | 2025-10-16 15:33:13.169091+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_random defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.170 | 2025-10-16 15:33:13.169200+00:00 [info] <0.230.0> Running boot step kernel_ready defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.170 | 2025-10-16 15:33:13.169282+00:00 [info] <0.230.0> Running boot step rabbit_sysmon_minder defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.172 | 2025-10-16 15:33:13.172094+00:00 [info] <0.230.0> Running boot step rabbit_epmd_monitor defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.175 | 2025-10-16 15:33:13.174724+00:00 [info] <0.649.0> epmd monitor knows us, inter-node communication (distribution) port: 25672
+rabbitmq         | 2025-10-16 12:33:13.175 | 2025-10-16 15:33:13.175037+00:00 [info] <0.230.0> Running boot step guid_generator defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.188 | 2025-10-16 15:33:13.187901+00:00 [info] <0.230.0> Running boot step rabbit_node_monitor defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.189 | 2025-10-16 15:33:13.188483+00:00 [info] <0.653.0> Starting rabbit_node_monitor (in ignore mode)
+rabbitmq         | 2025-10-16 12:33:13.189 | 2025-10-16 15:33:13.188809+00:00 [info] <0.230.0> Running boot step delegate_sup defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.191 | 2025-10-16 15:33:13.190656+00:00 [info] <0.230.0> Running boot step rabbit_memory_monitor defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.192 | 2025-10-16 15:33:13.191468+00:00 [info] <0.230.0> Running boot step rabbit_fifo_dlx_sup defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.192 | 2025-10-16 15:33:13.191709+00:00 [info] <0.230.0> Running boot step core_initialized defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.192 | 2025-10-16 15:33:13.191818+00:00 [info] <0.230.0> Running boot step upgrade_queues defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.207 | 2025-10-16 15:33:13.206351+00:00 [info] <0.230.0> message_store upgrades: 1 to apply
+rabbitmq         | 2025-10-16 12:33:13.207 | 2025-10-16 15:33:13.206632+00:00 [info] <0.230.0> message_store upgrades: Applying rabbit_variable_queue:move_messages_to_vhost_store
+rabbitmq         | 2025-10-16 12:33:13.207 | 2025-10-16 15:33:13.206862+00:00 [info] <0.230.0> message_store upgrades: No durable queues found. Skipping message store migration
+rabbitmq         | 2025-10-16 12:33:13.207 | 2025-10-16 15:33:13.206927+00:00 [info] <0.230.0> message_store upgrades: Removing the old message store data
+rabbitmq         | 2025-10-16 12:33:13.209 | 2025-10-16 15:33:13.208771+00:00 [info] <0.230.0> message_store upgrades: All upgrades applied successfully
+rabbitmq         | 2025-10-16 12:33:13.237 | 2025-10-16 15:33:13.236485+00:00 [info] <0.230.0> Running boot step channel_tracking defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.237 | 2025-10-16 15:33:13.236658+00:00 [info] <0.230.0> Running boot step rabbit_channel_tracking_handler defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.237 | 2025-10-16 15:33:13.236960+00:00 [info] <0.230.0> Running boot step connection_tracking defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.238 | 2025-10-16 15:33:13.237023+00:00 [info] <0.230.0> Running boot step rabbit_connection_tracking_handler defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.238 | 2025-10-16 15:33:13.237330+00:00 [info] <0.230.0> Running boot step rabbit_definitions_hashing defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.239 | 2025-10-16 15:33:13.237802+00:00 [info] <0.230.0> Running boot step rabbit_exchange_parameters defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.239 | 2025-10-16 15:33:13.238250+00:00 [info] <0.230.0> Running boot step rabbit_mirror_queue_misc defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.240 | 2025-10-16 15:33:13.239601+00:00 [info] <0.230.0> Running boot step rabbit_policies defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.241 | 2025-10-16 15:33:13.240531+00:00 [info] <0.230.0> Running boot step rabbit_policy defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.241 | 2025-10-16 15:33:13.240811+00:00 [info] <0.230.0> Running boot step rabbit_queue_location_validator defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.241 | 2025-10-16 15:33:13.241083+00:00 [info] <0.230.0> Running boot step rabbit_quorum_memory_manager defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.241 | 2025-10-16 15:33:13.241378+00:00 [info] <0.230.0> Running boot step rabbit_stream_coordinator defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.242 | 2025-10-16 15:33:13.241841+00:00 [info] <0.230.0> Running boot step rabbit_vhost_limit defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.242 | 2025-10-16 15:33:13.242037+00:00 [info] <0.230.0> Running boot step rabbit_mgmt_reset_handler defined by app rabbitmq_management
+rabbitmq         | 2025-10-16 12:33:13.242 | 2025-10-16 15:33:13.242202+00:00 [info] <0.230.0> Running boot step rabbit_mgmt_db_handler defined by app rabbitmq_management_agent
+rabbitmq         | 2025-10-16 12:33:13.242 | 2025-10-16 15:33:13.242280+00:00 [info] <0.230.0> Management plugin: using rates mode 'basic'
+rabbitmq         | 2025-10-16 12:33:13.243 | 2025-10-16 15:33:13.243267+00:00 [info] <0.230.0> Running boot step recovery defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.246 | 2025-10-16 15:33:13.245444+00:00 [info] <0.230.0> Running boot step empty_db_check defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.246 | 2025-10-16 15:33:13.245563+00:00 [info] <0.230.0> Will seed default virtual host and user...
+rabbitmq         | 2025-10-16 12:33:13.246 | 2025-10-16 15:33:13.245669+00:00 [info] <0.230.0> Adding vhost 'lexy_dev_vhost' (description: 'Default virtual host', tags: [])
+rabbitmq         | 2025-10-16 12:33:13.342 | 2025-10-16 15:33:13.341464+00:00 [info] <0.695.0> Making sure data directory '/var/lib/rabbitmq/mnesia/rabbit@5144693017bb/msg_stores/vhosts/EX1ZEJUM69R24E7WMA0AVQ9IV' for vhost 'lexy_dev_vhost' exists
+rabbitmq         | 2025-10-16 12:33:13.349 | 2025-10-16 15:33:13.348379+00:00 [info] <0.695.0> Setting segment_entry_count for vhost 'lexy_dev_vhost' with 0 queues to '2048'
+rabbitmq         | 2025-10-16 12:33:13.362 | 2025-10-16 15:33:13.361966+00:00 [info] <0.695.0> Starting message stores for vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:13.362 | 2025-10-16 15:33:13.362480+00:00 [info] <0.700.0> Message store "EX1ZEJUM69R24E7WMA0AVQ9IV/msg_store_transient": using rabbit_msg_store_ets_index to provide index
+rabbitmq         | 2025-10-16 12:33:13.367 | 2025-10-16 15:33:13.367011+00:00 [info] <0.695.0> Started message store of type transient for vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:13.368 | 2025-10-16 15:33:13.367465+00:00 [info] <0.704.0> Message store "EX1ZEJUM69R24E7WMA0AVQ9IV/msg_store_persistent": using rabbit_msg_store_ets_index to provide index
+rabbitmq         | 2025-10-16 12:33:13.371 | 2025-10-16 15:33:13.370464+00:00 [warning] <0.704.0> Message store "EX1ZEJUM69R24E7WMA0AVQ9IV/msg_store_persistent": rebuilding indices from scratch
+rabbitmq         | 2025-10-16 12:33:13.373 | 2025-10-16 15:33:13.373171+00:00 [info] <0.695.0> Started message store of type persistent for vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:13.373 | 2025-10-16 15:33:13.373444+00:00 [info] <0.695.0> Recovering 0 queues of type rabbit_classic_queue took 24ms
+rabbitmq         | 2025-10-16 12:33:13.374 | 2025-10-16 15:33:13.373642+00:00 [info] <0.695.0> Recovering 0 queues of type rabbit_quorum_queue took 0ms
+rabbitmq         | 2025-10-16 12:33:13.374 | 2025-10-16 15:33:13.373798+00:00 [info] <0.695.0> Recovering 0 queues of type rabbit_stream_queue took 0ms
+rabbitmq         | 2025-10-16 12:33:13.390 | 2025-10-16 15:33:13.389948+00:00 [info] <0.230.0> Created user 'lexy_dev'
+rabbitmq         | 2025-10-16 12:33:13.402 | 2025-10-16 15:33:13.401540+00:00 [info] <0.230.0> Successfully set user tags for user 'lexy_dev' to [administrator]
+rabbitmq         | 2025-10-16 12:33:13.413 | 2025-10-16 15:33:13.413187+00:00 [info] <0.230.0> Successfully set permissions for 'lexy_dev' in virtual host 'lexy_dev_vhost' to '.*', '.*', '.*'
+rabbitmq         | 2025-10-16 12:33:13.414 | 2025-10-16 15:33:13.413311+00:00 [info] <0.230.0> Running boot step rabbit_observer_cli defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.414 | 2025-10-16 15:33:13.413575+00:00 [info] <0.230.0> Running boot step rabbit_looking_glass defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.414 | 2025-10-16 15:33:13.413622+00:00 [info] <0.230.0> Running boot step rabbit_core_metrics_gc defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.414 | 2025-10-16 15:33:13.414128+00:00 [info] <0.230.0> Running boot step background_gc defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.414596+00:00 [info] <0.230.0> Running boot step routing_ready defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.414688+00:00 [info] <0.230.0> Running boot step pre_flight defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.414911+00:00 [info] <0.230.0> Running boot step notify_cluster defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.415015+00:00 [info] <0.230.0> Running boot step networking defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.415240+00:00 [info] <0.230.0> Running boot step definition_import_worker_pool defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.415 | 2025-10-16 15:33:13.415346+00:00 [info] <0.287.0> Starting worker pool 'definition_import_pool' with 12 processes in it
+rabbitmq         | 2025-10-16 12:33:13.417 | 2025-10-16 15:33:13.417010+00:00 [info] <0.230.0> Running boot step cluster_name defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.417 | 2025-10-16 15:33:13.417190+00:00 [info] <0.230.0> Initialising internal cluster ID to 'rabbitmq-cluster-id-Ghkl5D9gaIpcqd3LltU3vg'
+rabbitmq         | 2025-10-16 12:33:13.429 | 2025-10-16 15:33:13.429203+00:00 [info] <0.230.0> Running boot step direct_client defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.429 | 2025-10-16 15:33:13.429582+00:00 [info] <0.230.0> Running boot step rabbit_maintenance_mode_state defined by app rabbit
+rabbitmq         | 2025-10-16 12:33:13.430 | 2025-10-16 15:33:13.429667+00:00 [info] <0.230.0> Creating table rabbit_node_maintenance_states for maintenance mode status
+rabbitmq         | 2025-10-16 12:33:13.449 | 2025-10-16 15:33:13.448185+00:00 [info] <0.230.0> Running boot step rabbit_management_load_definitions defined by app rabbitmq_management
+rabbitmq         | 2025-10-16 12:33:13.449 | 2025-10-16 15:33:13.448643+00:00 [info] <0.750.0> Resetting node maintenance status
+rabbitmq         | 2025-10-16 12:33:13.486 | 2025-10-16 15:33:13.485045+00:00 [info] <0.809.0> Management plugin: HTTP (non-TLS) listener started on port 15672
+rabbitmq         | 2025-10-16 12:33:13.486 | 2025-10-16 15:33:13.485530+00:00 [info] <0.837.0> Statistics database started.
+rabbitmq         | 2025-10-16 12:33:13.486 | 2025-10-16 15:33:13.485784+00:00 [info] <0.836.0> Starting worker pool 'management_worker_pool' with 3 processes in it
+rabbitmq         | 2025-10-16 12:33:13.508 | 2025-10-16 15:33:13.507786+00:00 [info] <0.851.0> Prometheus metrics: HTTP (non-TLS) listener started on port 15692
+rabbitmq         | 2025-10-16 12:33:13.508 | 2025-10-16 15:33:13.508420+00:00 [info] <0.750.0> Ready to start client connection listeners
+rabbitmq         | 2025-10-16 12:33:13.514 | 2025-10-16 15:33:13.513952+00:00 [info] <0.895.0> started TCP listener on [::]:5672
+rabbitmq         | 2025-10-16 12:33:13.748 |  completed with 4 plugins.
+rabbitmq         | 2025-10-16 12:33:13.748 | 2025-10-16 15:33:13.747240+00:00 [info] <0.750.0> Server startup complete; 4 plugins started.
+rabbitmq         | 2025-10-16 12:33:13.748 | 2025-10-16 15:33:13.747240+00:00 [info] <0.750.0>  * rabbitmq_prometheus
+rabbitmq         | 2025-10-16 12:33:13.748 | 2025-10-16 15:33:13.747240+00:00 [info] <0.750.0>  * rabbitmq_management
+rabbitmq         | 2025-10-16 12:33:13.748 | 2025-10-16 15:33:13.747240+00:00 [info] <0.750.0>  * rabbitmq_management_agent
+rabbitmq         | 2025-10-16 12:33:13.748 | 2025-10-16 15:33:13.747240+00:00 [info] <0.750.0>  * rabbitmq_web_dispatch
+rabbitmq         | 2025-10-16 12:33:13.851 | 2025-10-16 15:33:13.850873+00:00 [info] <0.9.0> Time to start RabbitMQ: 18121310 us
+worker_test      | 2025-10-16 12:33:27.496 | /usr/local/lib/python3.11/site-packages/celery/platforms.py:829: SecurityWarning: You're running the worker with superuser privileges: this is
+worker_test      | 2025-10-16 12:33:27.496 | absolutely not recommended!
+worker_test      | 2025-10-16 12:33:27.496 | 
+worker_test      | 2025-10-16 12:33:27.496 | Please specify a different user using the --uid option.
+worker_test      | 2025-10-16 12:33:27.496 | 
+worker_test      | 2025-10-16 12:33:27.496 | User information: uid=0 euid=0 gid=0 egid=0
+worker_test      | 2025-10-16 12:33:27.496 | 
+worker_test      | 2025-10-16 12:33:27.496 |   warnings.warn(SecurityWarning(ROOT_DISCOURAGED.format(
+worker_test      | 2025-10-16 12:33:27.730 |  
+worker_test      | 2025-10-16 12:33:27.731 |  -------------- celery@0b461254ae0a v5.3.4 (emerald-rush)
+worker_test      | 2025-10-16 12:33:27.731 | --- ***** ----- 
+worker_test      | 2025-10-16 12:33:27.731 | -- ******* ---- Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41 2025-10-16 15:33:27
+worker_test      | 2025-10-16 12:33:27.731 | - *** --- * --- 
+worker_test      | 2025-10-16 12:33:27.731 | - ** ---------- [config]
+worker_test      | 2025-10-16 12:33:27.731 | - ** ---------- .> app:         worker_test:0x708f4f208d90
+worker_test      | 2025-10-16 12:33:27.731 | - ** ---------- .> transport:   amqp://lexy_dev:**@rabbitmq:5672/lexy_dev_vhost
+worker_test      | 2025-10-16 12:33:27.731 | - ** ---------- .> results:     redis://:**@redis:6379/0
+worker_test      | 2025-10-16 12:33:27.731 | - *** --- * --- .> concurrency: 12 (prefork)
+worker_test      | 2025-10-16 12:33:27.731 | -- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+worker_test      | 2025-10-16 12:33:27.731 | --- ***** ----- 
+worker_test      | 2025-10-16 12:33:27.731 |  -------------- [queues]
+worker_test      | 2025-10-16 12:33:27.731 |                 .> celery           exchange=celery(direct) key=celery
+worker_test      | 2025-10-16 12:33:27.731 |                 
+worker_test      | 2025-10-16 12:33:27.731 | 
+worker_test      | 2025-10-16 12:33:27.731 | [tasks]
+worker_test      | 2025-10-16 12:33:27.731 |   . worker_test.process_sqs_message
+worker_test      | 2025-10-16 12:33:27.731 | 
+worker_test      | 2025-10-16 12:33:28.709 | [2025-10-16 15:33:28,708: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+worker_test      | 2025-10-16 12:33:28.710 | whether broker connection retries are made during startup in Celery 6.0 and above.
+worker_test      | 2025-10-16 12:33:28.710 | If you wish to retain the existing behavior for retrying connections on startup,
+worker_test      | 2025-10-16 12:33:28.710 | you should set broker_connection_retry_on_startup to True.
+worker_test      | 2025-10-16 12:33:28.710 |   warnings.warn(
+worker_test      | 2025-10-16 12:33:28.710 | 
+rabbitmq         | 2025-10-16 12:33:28.721 | 2025-10-16 15:33:28.720639+00:00 [info] <0.900.0> accepting AMQP connection <0.900.0> (172.18.0.5:38556 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:28.726 | 2025-10-16 15:33:28.725732+00:00 [info] <0.900.0> connection <0.900.0> (172.18.0.5:38556 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+worker_test      | 2025-10-16 12:33:28.727 | [2025-10-16 15:33:28,725: INFO/MainProcess] Connected to amqp://lexy_dev:**@rabbitmq:5672/lexy_dev_vhost
+worker_test      | 2025-10-16 12:33:28.728 | [2025-10-16 15:33:28,728: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+worker_test      | 2025-10-16 12:33:28.728 | whether broker connection retries are made during startup in Celery 6.0 and above.
+worker_test      | 2025-10-16 12:33:28.728 | If you wish to retain the existing behavior for retrying connections on startup,
+worker_test      | 2025-10-16 12:33:28.728 | you should set broker_connection_retry_on_startup to True.
+worker_test      | 2025-10-16 12:33:28.728 |   warnings.warn(
+worker_test      | 2025-10-16 12:33:28.728 | 
+rabbitmq         | 2025-10-16 12:33:28.731 | 2025-10-16 15:33:28.730890+00:00 [info] <0.908.0> accepting AMQP connection <0.908.0> (172.18.0.5:38570 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:28.735 | 2025-10-16 15:33:28.735042+00:00 [info] <0.908.0> connection <0.908.0> (172.18.0.5:38570 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+worker_test      | 2025-10-16 12:33:28.736 | [2025-10-16 15:33:28,736: INFO/MainProcess] mingle: searching for neighbors
+rabbitmq         | 2025-10-16 12:33:28.756 | 2025-10-16 15:33:28.756273+00:00 [info] <0.926.0> accepting AMQP connection <0.926.0> (172.18.0.5:38574 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:28.761 | 2025-10-16 15:33:28.760873+00:00 [info] <0.926.0> connection <0.926.0> (172.18.0.5:38574 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+flower           | 2025-10-16 12:33:29.024 | [I 251016 15:33:29 command:168] Visit me at http://0.0.0.0:5555
+flower           | 2025-10-16 12:33:29.032 | [I 251016 15:33:29 command:176] Broker: amqp://lexy_dev:**@rabbitmq:5672/lexy_dev_vhost
+flower           | 2025-10-16 12:33:29.035 | [I 251016 15:33:29 command:177] Registered tasks: 
+flower           | 2025-10-16 12:33:29.035 |     ['celery.accumulate',
+flower           | 2025-10-16 12:33:29.035 |      'celery.backend_cleanup',
+flower           | 2025-10-16 12:33:29.035 |      'celery.chain',
+flower           | 2025-10-16 12:33:29.035 |      'celery.chord',
+flower           | 2025-10-16 12:33:29.035 |      'celery.chord_unlock',
+flower           | 2025-10-16 12:33:29.035 |      'celery.chunks',
+flower           | 2025-10-16 12:33:29.035 |      'celery.group',
+flower           | 2025-10-16 12:33:29.035 |      'celery.map',
+flower           | 2025-10-16 12:33:29.035 |      'celery.starmap']
+rabbitmq         | 2025-10-16 12:33:29.042 | 2025-10-16 15:33:29.042076+00:00 [info] <0.939.0> accepting AMQP connection <0.939.0> (172.18.0.7:52328 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.048 | 2025-10-16 15:33:29.048273+00:00 [info] <0.939.0> connection <0.939.0> (172.18.0.7:52328 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.054 | 2025-10-16 15:33:29.053672+00:00 [info] <0.950.0> accepting AMQP connection <0.950.0> (172.18.0.7:52342 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.061 | 2025-10-16 15:33:29.061101+00:00 [info] <0.950.0> connection <0.950.0> (172.18.0.7:52342 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+flower           | 2025-10-16 12:33:29.061 | [I 251016 15:33:29 mixins:228] Connected to amqp://lexy_dev:**@rabbitmq:5672/lexy_dev_vhost
+rabbitmq         | 2025-10-16 12:33:29.071 | 2025-10-16 15:33:29.071219+00:00 [info] <0.962.0> accepting AMQP connection <0.962.0> (172.18.0.7:52350 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.072 | 2025-10-16 15:33:29.072031+00:00 [info] <0.965.0> accepting AMQP connection <0.965.0> (172.18.0.7:52360 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.073 | 2025-10-16 15:33:29.072538+00:00 [info] <0.971.0> accepting AMQP connection <0.971.0> (172.18.0.7:52386 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.074 | 2025-10-16 15:33:29.073534+00:00 [info] <0.968.0> accepting AMQP connection <0.968.0> (172.18.0.7:52372 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.078 | 2025-10-16 15:33:29.078159+00:00 [info] <0.974.0> accepting AMQP connection <0.974.0> (172.18.0.7:52390 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.083 | 2025-10-16 15:33:29.082679+00:00 [info] <0.965.0> connection <0.965.0> (172.18.0.7:52360 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.084 | 2025-10-16 15:33:29.084294+00:00 [info] <0.978.0> accepting AMQP connection <0.978.0> (172.18.0.7:52400 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.086 | 2025-10-16 15:33:29.085646+00:00 [info] <0.971.0> connection <0.971.0> (172.18.0.7:52386 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.088 | 2025-10-16 15:33:29.088112+00:00 [info] <0.962.0> connection <0.962.0> (172.18.0.7:52350 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.088 | 2025-10-16 15:33:29.088335+00:00 [info] <0.993.0> accepting AMQP connection <0.993.0> (172.18.0.7:52424 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.090 | 2025-10-16 15:33:29.089821+00:00 [info] <0.987.0> accepting AMQP connection <0.987.0> (172.18.0.7:52412 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.092 | 2025-10-16 15:33:29.092222+00:00 [info] <0.968.0> connection <0.968.0> (172.18.0.7:52372 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.095 | 2025-10-16 15:33:29.094928+00:00 [info] <0.974.0> connection <0.974.0> (172.18.0.7:52390 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.101 | 2025-10-16 15:33:29.101091+00:00 [info] <0.978.0> connection <0.978.0> (172.18.0.7:52400 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.104 | 2025-10-16 15:33:29.103310+00:00 [info] <0.993.0> connection <0.993.0> (172.18.0.7:52424 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.108 | 2025-10-16 15:33:29.108083+00:00 [info] <0.987.0> connection <0.987.0> (172.18.0.7:52412 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.116 | 2025-10-16 15:33:29.116090+00:00 [info] <0.1079.0> accepting AMQP connection <0.1079.0> (172.18.0.7:52430 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.123 | 2025-10-16 15:33:29.122484+00:00 [info] <0.1098.0> accepting AMQP connection <0.1098.0> (172.18.0.7:52440 -> 172.18.0.3:5672)
+rabbitmq         | 2025-10-16 12:33:29.124 | 2025-10-16 15:33:29.123522+00:00 [info] <0.1079.0> connection <0.1079.0> (172.18.0.7:52430 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+rabbitmq         | 2025-10-16 12:33:29.129 | 2025-10-16 15:33:29.129189+00:00 [info] <0.1098.0> connection <0.1098.0> (172.18.0.7:52440 -> 172.18.0.3:5672): user 'lexy_dev' authenticated and granted access to vhost 'lexy_dev_vhost'
+worker_test      | 2025-10-16 12:33:29.785 | [2025-10-16 15:33:29,785: INFO/MainProcess] mingle: all alone
+worker_test      | 2025-10-16 12:33:29.853 | [2025-10-16 15:33:29,853: INFO/MainProcess] celery@0b461254ae0a ready.
+flower           | 2025-10-16 12:33:30.153 | [W 251016 15:33:30 inspector:44] Inspect method revoked failed
+flower           | 2025-10-16 12:33:30.164 | [W 251016 15:33:30 inspector:44] Inspect method stats failed
+flower           | 2025-10-16 12:33:30.165 | [W 251016 15:33:30 inspector:44] Inspect method reserved failed
+flower           | 2025-10-16 12:33:30.166 | [W 251016 15:33:30 inspector:44] Inspect method conf failed
+flower           | 2025-10-16 12:33:30.167 | [W 251016 15:33:30 inspector:44] Inspect method registered failed
+flower           | 2025-10-16 12:33:30.168 | [W 251016 15:33:30 inspector:44] Inspect method active_queues failed
+flower           | 2025-10-16 12:33:30.168 | [W 251016 15:33:30 inspector:44] Inspect method active failed
+flower           | 2025-10-16 12:33:30.169 | [W 251016 15:33:30 inspector:44] Inspect method scheduled failed
+worker_test      | 2025-10-16 12:33:34.040 | [2025-10-16 15:33:34,040: INFO/MainProcess] Events of group {task} enabled by remote.

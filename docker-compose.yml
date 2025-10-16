@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  # --- 1. SERVICIOS DE INFRAESTRUCTURA BASE ---
+  
+  redis:
+    image: redis:6-alpine
+    container_name: redis_cache_worker_sqs_sns
+    command: ["redis-server", "--requirepass", "test123"]
+    environment:
+      - REDIS_PASSWORD=test123
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "test123", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    networks:
+      - lexy_net
+
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: rabbitmq_broker
+    ports:
+      - "5672:5672"   # Puerto del broker
+      - "15672:15672" # Interfaz de gestión web
+    environment:
+      RABBITMQ_DEFAULT_USER: lexy_dev
+      RABBITMQ_DEFAULT_PASS: 2NtH4p7Qid
+      RABBITMQ_DEFAULT_VHOST: lexy_dev_vhost
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - lexy_net
+
+  # --- 2. APLICACIÓN FASTAPI TEST ---
+  fastapi_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    container_name: fastapi_test
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./FastApi:/app
+      - ./.env:/app/.env
+    env_file: .env
+    command: uvicorn fastapi_test:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - lexy_net
+
+  # --- 3. WORKER CELERY (separado del gateway) ---
+  worker_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: worker_test
+    volumes:
+      - ./Worker:/app
+      - ./.env:/app/.env
+    env_file: .env
+    environment:
+      # ← FORZAR misma configuración que Flower (RabbitMQ + Redis)
+      - CELERY_BROKER_URL=amqp://lexy_dev:2NtH4p7Qid@rabbitmq:5672/lexy_dev_vhost
+      - CELERY_RESULT_BACKEND=redis://:test123@redis:6379/0
+    command: celery -A worker_test worker --loglevel=INFO --hostname=worker_test_separado@%h
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - lexy_net
+
+  # --- 4. GATEWAY SQS (separado) ---
+  gateway_sqs_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    container_name: gateway_sqs_test
+    volumes:
+      - ./Worker:/app
+      - ./.env:/app/.env
+    env_file: .env
+    environment:
+      # ← Gateway también usa RabbitMQ para enviar tareas
+      - CELERY_BROKER_URL=amqp://lexy_dev:2NtH4p7Qid@rabbitmq:5672/lexy_dev_vhost
+      - CELERY_RESULT_BACKEND=redis://:test123@redis:6379/0
+    command: python sqs_gateway.py
+    depends_on:
+      - rabbitmq
+      - worker_test
+    networks:
+      - lexy_net
+
+  # --- 5. FLOWER PARA MONITOREO ---
+  flower:
+    image: mher/flower
+    container_name: celery_flower_test
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=amqp://lexy_dev:2NtH4p7Qid@rabbitmq:5672/lexy_dev_vhost
+      - CELERY_RESULT_BACKEND=redis://:test123@redis:6379/0
+      - FLOWER_BASIC_AUTH=admin:admin123
+    depends_on:
+      redis:
+        condition: service_healthy
+      worker_test:
+        condition: service_started
+    networks:
+      - lexy_net
+
+# --- Definición de la Red ---
+networks:
+  lexy_net:
+    driver: bridge
