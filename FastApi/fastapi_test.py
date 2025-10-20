@@ -24,7 +24,7 @@ class PublishData(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"status": "FastAPI funcionando con un cambio automatizado desde ecr", "version": "1.0"}
+    return {"status": " FastAPI funcionando con un cambio automatizado desde ecr", "version": "1.0"}
 
 @app.get("/debug/config")
 def debug_config():
