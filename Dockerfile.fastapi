@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código
 COPY FastApi/ .
-COPY .env .
+#COPY .env .
 
 EXPOSE 8000
 
