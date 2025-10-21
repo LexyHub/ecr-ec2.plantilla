@@ -140,19 +140,24 @@ jobs:
     needs: [detect-changes, build-fastapi]
     if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
     steps:
-      - name: Deploy FastAPI to Server A
+      - name: Deploy FastAPI container to EC2
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_A_IP }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "====> Pulling latest repo..."
+            echo "====> Pulling latest code..."
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
+
+            echo "====> Updating FastAPI container..."
             docker compose -f docker-compose.fastapi.yml pull
-            docker compose -f docker-compose.fastapi.yml up -d --no-deps
-            echo "✅ FastAPI deployed successfully!"
+            docker compose -f docker-compose.fastapi.yml up -d --no-deps --build
+
+
+
+            echo "✅ FastAPI deployment complete!"
 
   # ============================================
   # DEPLOY WORKER
