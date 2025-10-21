@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # --- Redis ---
   redis:
     image: redis:6-alpine
     container_name: redis_cache_worker_sqs_sns
@@ -16,7 +15,6 @@ services:
     networks:
       - lexy_net
 
-  # --- RabbitMQ ---
   rabbitmq:
     image: rabbitmq:3.11-management-alpine
     container_name: rabbitmq_broker
@@ -35,7 +33,6 @@ services:
     networks:
       - lexy_net
 
-  # --- Worker Celery ---
   worker_test:
     build:
       context: .
@@ -57,7 +54,6 @@ services:
     networks:
       - lexy_net
 
-  # --- Gateway SQS ---
   gateway_sqs_test:
     build:
       context: .
@@ -77,7 +73,6 @@ services:
     networks:
       - lexy_net
 
-  # --- Flower ---
   flower:
     image: mher/flower
     container_name: celery_flower_test
