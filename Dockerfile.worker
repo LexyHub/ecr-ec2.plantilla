@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código
 COPY Worker/ .
-COPY .env .
+# COPY .env .
 
 # Comando que inicia tanto el polling SQS como el worker Celery
 CMD python worker_test.py
