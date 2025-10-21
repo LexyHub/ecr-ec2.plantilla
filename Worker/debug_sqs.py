@@ -6,6 +6,7 @@ import time
 
 load_dotenv()
 ### Función de debug para el polling de SQS
+#
 def debug_sqs_polling():
     """Debug completo del polling SQS"""
     

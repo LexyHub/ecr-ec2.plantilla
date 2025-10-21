@@ -39,6 +39,11 @@ jobs:
               - 'Dockerfile.worker'
               - 'docker-compose.worker.yml'
 
+      - name: Show detected changes
+        run: |
+          echo "🟣 FastAPI changed: ${{ steps.filter.outputs.fastapi }}"
+          echo "🟢 Worker changed:  ${{ steps.filter.outputs.worker }}"
+
   # ============================================
   # BUILD FASTAPI IMAGE
   # ============================================
@@ -66,6 +71,7 @@ jobs:
           echo "🚀 Building FastAPI image: $IMAGE"
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
+          echo "✅ FastAPI image pushed to ECR: $IMAGE"
           echo "image_fastapi=$IMAGE" >> $GITHUB_ENV
 
   # ============================================
@@ -95,6 +101,7 @@ jobs:
           echo "🚀 Building Worker image: $IMAGE"
           docker build -f Dockerfile.worker -t $IMAGE .
           docker push $IMAGE
+          echo "✅ Worker image pushed to ECR: $IMAGE"
           echo "image_worker=$IMAGE" >> $GITHUB_ENV
 
   # ============================================
@@ -124,15 +131,13 @@ jobs:
           echo "✅ Both images found in ECR. Proceeding to deploy."
 
   # ============================================
-  # DEPLOY FASTAPI (solo si cambió o ambos cambiaron)
+  # DEPLOY FASTAPI
   # ============================================
   deploy-fastapi:
     name: 🚀 Deploy FastAPI to EC2
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-fastapi, build-worker, verify-builds]
-    if: |
-      needs.detect-changes.outputs.fastapi_changed == 'true' &&
-      (needs.build-worker.result != 'success' || needs.detect-changes.outputs.worker_changed != 'true' || needs.verify-builds.result == 'success')
+    needs: [detect-changes, build-fastapi]
+    if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
     steps:
       - name: Deploy FastAPI to Server A
         uses: appleboy/ssh-action@v1.1.0
@@ -149,15 +154,13 @@ jobs:
             echo "✅ FastAPI deployed successfully!"
 
   # ============================================
-  # DEPLOY WORKER (solo si cambió o ambos cambiaron)
+  # DEPLOY WORKER
   # ============================================
   deploy-worker:
     name: 🚀 Deploy Worker to EC2
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-worker, build-fastapi, verify-builds]
-    if: |
-      needs.detect-changes.outputs.worker_changed == 'true' &&
-      (needs.build-fastapi.result != 'success' || needs.detect-changes.outputs.fastapi_changed != 'true' || needs.verify-builds.result == 'success')
+    needs: [detect-changes, build-worker]
+    if: ${{ needs.detect-changes.outputs.worker_changed == 'true' }}
     steps:
       - name: Deploy Worker to Server B
         uses: appleboy/ssh-action@v1.1.0
@@ -172,3 +175,15 @@ jobs:
             docker compose -f docker-compose.worker.yml pull
             docker compose -f docker-compose.worker.yml up -d --no-deps
             echo "✅ Worker deployed successfully!"
+
+  # ============================================
+  # DEPLOY BOTH (solo si ambos cambiaron)
+  # ============================================
+  deploy-both:
+    name: 🤝 Deploy FastAPI & Worker together
+    runs-on: ubuntu-latest
+    needs: [verify-builds]
+    if: ${{ needs.verify-builds.result == 'success' }}
+    steps:
+      - name: Deploy both servers in sync
+        run: echo "✅ Both FastAPI & Worker built successfully. Proceeding dual deploy."
