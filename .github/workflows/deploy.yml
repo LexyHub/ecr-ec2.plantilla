@@ -1,4 +1,4 @@
-name: Deploy FastAPI & Worker to EC2 via ECR (Hybrid Conditional)
+name: Deploy FastAPI & Worker to EC2 via ECR 
 
 on:
   push:
@@ -13,6 +13,9 @@ on:
       - ".github/workflows/deploy.yml"
 
 jobs:
+  # ============================================
+  # DETECT CHANGED FILES
+  # ============================================
   detect-changes:
     name: 🕵️ Detect changed folders
     runs-on: ubuntu-latest
@@ -22,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Detect changes
+      - name: Detect changes in repo
         id: filter
         uses: dorny/paths-filter@v3
         with:
@@ -36,9 +39,9 @@ jobs:
               - 'Dockerfile.worker'
               - 'docker-compose.worker.yml'
 
-  # ================
-  # BUILD FASTAPI
-  # ================
+  # ============================================
+  # BUILD FASTAPI IMAGE
+  # ============================================
   build-fastapi:
     name: 🧱 Build FastAPI Image
     runs-on: ubuntu-latest
@@ -56,7 +59,7 @@ jobs:
       - id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build & Push FastAPI Image
+      - name: Build & Push FastAPI image
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:$COMMIT_HASH
@@ -65,9 +68,9 @@ jobs:
           docker push $IMAGE
           echo "image_fastapi=$IMAGE" >> $GITHUB_ENV
 
-  # ================
-  # BUILD WORKER
-  # ================
+  # ============================================
+  # BUILD WORKER IMAGE
+  # ============================================
   build-worker:
     name: 🧱 Build Worker Image
     runs-on: ubuntu-latest
@@ -85,7 +88,7 @@ jobs:
       - id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build & Push Worker Image
+      - name: Build & Push Worker image
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:$COMMIT_HASH
@@ -94,14 +97,16 @@ jobs:
           docker push $IMAGE
           echo "image_worker=$IMAGE" >> $GITHUB_ENV
 
-  # ================
+  # ============================================
   # VERIFY BOTH BUILDS (only if both changed)
-  # ================
+  # ============================================
   verify-builds:
     name: 🔍 Verify Both Builds Uploaded to ECR
     runs-on: ubuntu-latest
     needs: [build-fastapi, build-worker]
-    if: ${{ needs.build-fastapi.result == 'success' && needs.build-worker.result == 'success' }}
+    if: |
+      needs.build-fastapi.result == 'success' &&
+      needs.build-worker.result == 'success'
     steps:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -109,7 +114,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Verify ECR images exist
+      - name: Verify both images exist in ECR
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           echo "🔎 Checking FastAPI image..."
@@ -118,16 +123,16 @@ jobs:
           aws ecr describe-images --repository-name lexy/deudor/worker --image-ids imageTag=$COMMIT_HASH
           echo "✅ Both images found in ECR. Proceeding to deploy."
 
-  # ================
-  # DEPLOY FASTAPI
-  # ================
+  # ============================================
+  # DEPLOY FASTAPI (solo si cambió o ambos cambiaron)
+  # ============================================
   deploy-fastapi:
     name: 🚀 Deploy FastAPI to EC2
     runs-on: ubuntu-latest
-    needs: [build-fastapi, verify-builds]
+    needs: [detect-changes, build-fastapi, build-worker, verify-builds]
     if: |
       needs.detect-changes.outputs.fastapi_changed == 'true' &&
-      (needs.build-fastapi.result == 'success' || needs.verify-builds.result == 'success')
+      (needs.build-worker.result != 'success' || needs.detect-changes.outputs.worker_changed != 'true' || needs.verify-builds.result == 'success')
     steps:
       - name: Deploy FastAPI to Server A
         uses: appleboy/ssh-action@v1.1.0
@@ -143,16 +148,16 @@ jobs:
             docker compose -f docker-compose.fastapi.yml up -d --no-deps
             echo "✅ FastAPI deployed successfully!"
 
-  # ================
-  # DEPLOY WORKER
-  # ================
+  # ============================================
+  # DEPLOY WORKER (solo si cambió o ambos cambiaron)
+  # ============================================
   deploy-worker:
     name: 🚀 Deploy Worker to EC2
     runs-on: ubuntu-latest
-    needs: [build-worker, verify-builds]
+    needs: [detect-changes, build-worker, build-fastapi, verify-builds]
     if: |
       needs.detect-changes.outputs.worker_changed == 'true' &&
-      (needs.build-worker.result == 'success' || needs.verify-builds.result == 'success')
+      (needs.build-fastapi.result != 'success' || needs.detect-changes.outputs.fastapi_changed != 'true' || needs.verify-builds.result == 'success')
     steps:
       - name: Deploy Worker to Server B
         uses: appleboy/ssh-action@v1.1.0
