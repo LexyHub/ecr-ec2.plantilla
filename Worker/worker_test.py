@@ -22,7 +22,7 @@ def process_sqs_message(message_data):
     """Procesa mensaje de SQS con wait de 10 segundos"""
     print(f"📨 Mensaje recibido: {message_data}")
     
-    # Wait de 10 segundos
+    # Wait de 10 segundos---
     time.sleep(10)
     
     # Procesar datos
