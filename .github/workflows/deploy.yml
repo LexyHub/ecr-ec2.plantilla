@@ -146,6 +146,8 @@ jobs:
           host: ${{ secrets.SERVER_A_IP }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs:
+            FASTAPI_IMAGE_TAG: ${{ github.sha }}
           script: |
             echo "====> Pulling latest code..."
             cd /home/ec2-user/ecr-ec2.plantilla
@@ -153,7 +155,7 @@ jobs:
 
             echo "====> Updating FastAPI container..."
             docker compose -f docker-compose.fastapi.yml pull
-            docker compose -f docker-compose.fastapi.yml up -d --no-deps --build
+            docker compose -f docker-compose.fastapi.yml up -d --no-deps 
 
 
 
