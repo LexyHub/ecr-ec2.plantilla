@@ -24,7 +24,12 @@ class PublishData(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"status": " ahora si que FastAPI funcionando con un cambio automatizado desde ecr", "version": "1.0"}
+    return {"status": "FastAPI funcionando con un cambio automatizado desde ecr", "version": "1.0"}
+
+@app.get("/test_docker_deploy")
+def docker_deploy():
+    return {"status": "FastAPI desplegado correctamente desde Docker"}
+
 
 @app.get("/debug/config")
 def debug_config():

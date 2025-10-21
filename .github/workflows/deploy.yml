@@ -24,7 +24,8 @@ jobs:
 
       - name: Build & Push FastAPI image
         run: |
-          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:latest
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:$COMMIT_HASH
           echo "Building image: $IMAGE"
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
