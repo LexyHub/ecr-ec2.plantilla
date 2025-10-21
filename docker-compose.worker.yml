@@ -51,7 +51,7 @@ services:
     command: celery -A worker_test worker --loglevel=INFO --hostname=worker_test_separado@/root
     depends_on:
       redis:
-        condition: service_healthy
+        condition: service_healthy 
       rabbitmq:
         condition: service_healthy
     networks:
