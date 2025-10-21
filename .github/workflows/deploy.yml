@@ -1,50 +1,149 @@
-name: Deploy FastAPI to EC2 via ECR
+name: Deploy FastAPI & Worker to EC2 via ECR
+
 on:
   push:
     branches: [main]
+    paths:
+      - "FastApi/**"
+      - "Worker/**"
+      - "Dockerfile.fastapi"
+      - "Dockerfile.worker"
+      - "docker-compose.fastapi.yml"
+      - "docker-compose.worker.yml"
+      - ".github/workflows/deploy.yml"
 
 jobs:
-  build-and-deploy-fastapi:
+  # ================
+  # BUILD FASTAPI IMAGE
+  # ================
+  build-fastapi:
+    name: 🧱 Build FastAPI Image
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Login to Amazon ECR
-        id: login-ecr
+      - id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build & Push FastAPI image
+      - name: Build & Push FastAPI Image
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:$COMMIT_HASH
-          echo "Building image: $IMAGE"
+          echo "🚀 Building FastAPI image: $IMAGE"
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
+          echo "image_fastapi=$IMAGE" >> $GITHUB_ENV
 
-      - name: Deploy FastAPI container to EC2
+  # ================
+  # BUILD WORKER IMAGE
+  # ================
+  build-worker:
+    name: 🧱 Build Worker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & Push Worker Image
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:$COMMIT_HASH
+          echo "🚀 Building Worker image: $IMAGE"
+          docker build -f Dockerfile.worker -t $IMAGE .
+          docker push $IMAGE
+          echo "image_worker=$IMAGE" >> $GITHUB_ENV
+
+  # ================
+  # VERIFY BOTH BUILDS
+  # ================
+  verify-builds:
+    name: 🔍 Verify Both Builds Uploaded to ECR
+    runs-on: ubuntu-latest
+    needs: [build-fastapi, build-worker]
+    if: ${{ needs.build-fastapi.result == 'success' && needs.build-worker.result == 'success' }}
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Verify ECR images exist
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+
+          echo "🔎 Checking FastAPI image..."
+          aws ecr describe-images --repository-name lexy/deudor/fastapi --image-ids imageTag=$COMMIT_HASH
+
+          echo "🔎 Checking Worker image..."
+          aws ecr describe-images --repository-name lexy/deudor/worker --image-ids imageTag=$COMMIT_HASH
+
+          echo "✅ Both images found in ECR. Proceeding to deploy."
+
+  # ================
+  # DEPLOY FASTAPI
+  # ================
+  deploy-fastapi:
+    name: 🚀 Deploy FastAPI to EC2
+    runs-on: ubuntu-latest
+    needs: [verify-builds]
+    steps:
+      - name: Deploy FastAPI to Server A
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_A_IP }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "====> Pulling latest code..."
+            echo "====> Pulling latest repo..."
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
 
-            echo "====> Updating FastAPI container..."
+            echo "====> Pulling FastAPI image..."
             docker compose -f docker-compose.fastapi.yml pull
-            docker compose -f docker-compose.fastapi.yml up -d --no-deps --build
 
+            echo "====> Restarting FastAPI container..."
+            docker compose -f docker-compose.fastapi.yml up -d --no-deps
 
+            echo "✅ FastAPI deployed successfully!"
 
-            echo "✅ FastAPI deployment complete!"
+  # ================
+  # DEPLOY WORKER
+  # ================
+  deploy-worker:
+    name: 🚀 Deploy Worker to EC2
+    runs-on: ubuntu-latest
+    needs: [verify-builds]
+    steps:
+      - name: Deploy Worker to Server B
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_B_IP }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "====> Pulling latest repo..."
+            cd /home/ec2-user/ecr-ec2.plantilla
+            git pull
+
+            echo "====> Pulling Worker image..."
+            docker compose -f docker-compose.worker.yml pull
+
+            echo "====> Restarting Worker container..."
+            docker compose -f docker-compose.worker.yml up -d --no-deps
+
+            echo "✅ Worker deployed successfully!"

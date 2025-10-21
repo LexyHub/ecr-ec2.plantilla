@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import time
 
 load_dotenv()
-
+#
 def debug_sqs_polling():
     """Debug completo del polling SQS"""
     
