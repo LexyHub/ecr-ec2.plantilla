@@ -134,33 +134,30 @@ jobs:
   # ============================================
   # DEPLOY FASTAPI
   # ============================================
-deploy-fastapi:
-  name: 🚀 Deploy FastAPI to EC2
-  runs-on: ubuntu-latest
-  needs: [detect-changes, build-fastapi]
-  if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
-  steps:
-    - name: Deploy FastAPI container to EC2
-      uses: appleboy/ssh-action@v1.1.0
-      with:
-        host: ${{ secrets.SERVER_A_IP }}
-        username: root
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
-          echo "====> Pulling latest code..."
-          cd /home/ec2-user/ecr-ec2.plantilla
-          git pull
+  deploy-fastapi:
+    name: 🚀 Deploy FastAPI to EC2
+    runs-on: ubuntu-latest
+    needs: [detect-changes, build-fastapi]
+    if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
+    steps:
+      - name: Deploy FastAPI container to EC2
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_A_IP }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "====> Pulling latest code..."
+            cd /home/ec2-user/ecr-ec2.plantilla
+            git pull
 
-          echo "====> Pulling FastAPI image..."
-          docker compose -f docker-compose.fastapi.yml pull
+            echo "====> Updating FastAPI container..."
+            docker compose -f docker-compose.fastapi.yml pull
+            docker compose -f docker-compose.fastapi.yml up -d --no-deps --build
 
-          echo "====> Starting FastAPI container..."
-          docker compose -f docker-compose.fastapi.yml up -d --no-deps
 
-          echo "✅ FastAPI deployment complete!"
-      env:
-        FASTAPI_IMAGE_TAG: ${{ github.sha }}
 
+            echo "✅ FastAPI deployment complete!"
 
   # ============================================
   # DEPLOY WORKER
@@ -182,7 +179,7 @@ deploy-fastapi:
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
             docker compose -f docker-compose.worker.yml pull
-            docker compose -f docker-compose.worker.yml up -d --no-deps
+            docker compose -f docker-compose.worker.yml up -d --no-deps --build
             echo "✅ Worker deployed successfully!"
 
   # ============================================

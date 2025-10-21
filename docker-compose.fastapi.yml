@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   fastapi_test:
-    image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/lexy/deudor/fastapi:${FASTAPI_IMAGE_TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
     container_name: fastapi_test
     ports:
       - "8000:8000"
