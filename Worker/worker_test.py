@@ -23,7 +23,7 @@ def process_sqs_message(message_data):
     print(f"📨 Mensaje recibido: {message_data}")
     
     # Wait de 10 segundos---
-    time.sleep(60)
+    time.sleep(5)
     
     # Procesar datos
     result = {
