@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # --- Redis ---
   redis:
     image: redis:6-alpine
     container_name: redis_cache_worker_sqs_sns
@@ -15,6 +16,7 @@ services:
     networks:
       - lexy_net
 
+  # --- RabbitMQ ---
   rabbitmq:
     image: rabbitmq:3.11-management-alpine
     container_name: rabbitmq_broker
@@ -33,14 +35,10 @@ services:
     networks:
       - lexy_net
 
+  # --- Worker Celery ---
   worker_test:
-    build:
-      context: .
-      dockerfile: Dockerfile.worker
+    image: 125044483968.dkr.ecr.us-east-1.amazonaws.com/lexy/deudor/worker:latest
     container_name: worker_test
-    volumes:
-      - ./Worker:/app
-      - ./.env:/app/.env
     env_file: .env
     environment:
       - CELERY_BROKER_URL=amqp://lexy_dev:2NtH4p7Qid@rabbitmq:5672/lexy_dev_vhost
@@ -54,14 +52,10 @@ services:
     networks:
       - lexy_net
 
+  # --- Gateway SQS ---
   gateway_sqs_test:
-    build:
-      context: .
-      dockerfile: Dockerfile.worker
+    image: 125044483968.dkr.ecr.us-east-1.amazonaws.com/lexy/deudor/worker:latest
     container_name: gateway_sqs_test
-    volumes:
-      - ./Worker:/app
-      - ./.env:/app/.env
     env_file: .env
     environment:
       - CELERY_BROKER_URL=amqp://lexy_dev:2NtH4p7Qid@rabbitmq:5672/lexy_dev_vhost
@@ -73,6 +67,7 @@ services:
     networks:
       - lexy_net
 
+  # --- Flower ---
   flower:
     image: mher/flower
     container_name: celery_flower_test

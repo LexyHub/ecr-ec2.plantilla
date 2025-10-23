@@ -129,10 +129,10 @@ jobs:
   deploy-worker:
     name: 🚀 Deploy Worker to EC2
     runs-on: ubuntu-latest
-    needs: [build-worker]
-    if: ${{ always() && needs.build-worker.result == 'success' }}
+    needs: [detect-changes, build-worker]
+    if: ${{ needs.detect-changes.outputs.worker_changed == 'true' }}
     steps:
-      - name: Deploy Worker container to EC2
+      - name: Deploy Worker to Server B
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_B_IP }}
@@ -141,8 +141,19 @@ jobs:
           script: |
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
+
+            echo "====> Setting AWS credentials..."
+            export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            export AWS_DEFAULT_REGION=us-east-1
+
+            echo "====> Logging into ECR..."
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 125044483968.dkr.ecr.us-east-1.amazonaws.com
+
+            echo "====> Pulling latest Worker image..."
             docker compose -f docker-compose.worker.yml pull
             docker compose -f docker-compose.worker.yml up -d --no-deps
+
             echo "✅ Worker deployed successfully!"
 
   # ============================================
