@@ -1,4 +1,4 @@
-name: Deploy FastAPI & Worker to EC2 via ECR 
+name: Deploy FastAPI & Worker to EC2 via ECR
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   # ============================================
-  # DETECT CHANGED FILES
+  # DETECTA CAMBIOS
   # ============================================
   detect-changes:
     name: 🕵️ Detect changed folders
@@ -24,9 +24,7 @@ jobs:
       worker_changed: ${{ steps.filter.outputs.worker }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Detect changes in repo
-        id: filter
+      - id: filter
         uses: dorny/paths-filter@v3
         with:
           filters: |
@@ -38,98 +36,59 @@ jobs:
               - 'Worker/**'
               - 'Dockerfile.worker'
               - 'docker-compose.worker.yml'
-
-      - name: Show detected changes
-        run: |
+      - run: |
           echo "🟣 FastAPI changed: ${{ steps.filter.outputs.fastapi }}"
           echo "🟢 Worker changed:  ${{ steps.filter.outputs.worker }}"
 
   # ============================================
-  # BUILD FASTAPI IMAGE
+  # BUILD FASTAPI
   # ============================================
   build-fastapi:
     name: 🧱 Build FastAPI Image
     runs-on: ubuntu-latest
-    needs: [detect-changes]
+    needs: detect-changes
     if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
     steps:
       - uses: actions/checkout@v4
-
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
       - id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
       - name: Build & Push FastAPI image
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:$COMMIT_HASH
-          echo "🚀 Building FastAPI image: $IMAGE"
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
-          echo "✅ FastAPI image pushed to ECR: $IMAGE"
           echo "image_fastapi=$IMAGE" >> $GITHUB_ENV
 
   # ============================================
-  # BUILD WORKER IMAGE
+  # BUILD WORKER
   # ============================================
   build-worker:
     name: 🧱 Build Worker Image
     runs-on: ubuntu-latest
-    needs: [detect-changes]
+    needs: detect-changes
     if: ${{ needs.detect-changes.outputs.worker_changed == 'true' }}
     steps:
       - uses: actions/checkout@v4
-
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
       - id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
       - name: Build & Push Worker image
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:$COMMIT_HASH
-          echo "🚀 Building Worker image: $IMAGE"
           docker build -f Dockerfile.worker -t $IMAGE .
           docker push $IMAGE
-          echo "✅ Worker image pushed to ECR: $IMAGE"
           echo "image_worker=$IMAGE" >> $GITHUB_ENV
-
-  # ============================================
-  # VERIFY BOTH BUILDS (only if both changed)
-  # ============================================
-  verify-builds:
-    name: 🔍 Verify Both Builds Uploaded to ECR
-    runs-on: ubuntu-latest
-    needs: [build-fastapi, build-worker]
-    if: |
-      needs.build-fastapi.result == 'success' &&
-      needs.build-worker.result == 'success'
-    steps:
-      - uses: aws-actions/configure-aws-credentials@v4
-      - uses: actions/checkout@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Verify both images exist in ECR
-        run: |
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          echo "🔎 Checking FastAPI image..."
-          aws ecr describe-images --repository-name lexy/deudor/fastapi --image-ids imageTag=$COMMIT_HASH
-          echo "🔎 Checking Worker image..."
-          aws ecr describe-images --repository-name lexy/deudor/worker --image-ids imageTag=$COMMIT_HASH
-          echo "✅ Both images found in ECR. Proceeding to deploy."
 
   # ============================================
   # DEPLOY FASTAPI
@@ -137,8 +96,8 @@ jobs:
   deploy-fastapi:
     name: 🚀 Deploy FastAPI to EC2
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-fastapi]
-    if: ${{ needs.detect-changes.outputs.fastapi_changed == 'true' }}
+    needs: [build-fastapi]
+    if: ${{ always() && needs.build-fastapi.result == 'success' }}
     steps:
       - name: Deploy FastAPI container to EC2
         uses: appleboy/ssh-action@v1.1.0
@@ -147,17 +106,11 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "====> Pulling latest code..."
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
-
-            echo "====> Updating FastAPI container..."
             docker compose -f docker-compose.fastapi.yml pull
-            docker compose -f docker-compose.fastapi.yml up -d --no-deps --build
-
-
-
-            echo "✅ FastAPI deployment complete!"
+            docker compose -f docker-compose.fastapi.yml up -d --no-deps
+            echo "✅ FastAPI deployed successfully!"
 
   # ============================================
   # DEPLOY WORKER
@@ -165,31 +118,32 @@ jobs:
   deploy-worker:
     name: 🚀 Deploy Worker to EC2
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-worker]
-    if: ${{ needs.detect-changes.outputs.worker_changed == 'true' }}
+    needs: [build-worker]
+    if: ${{ always() && needs.build-worker.result == 'success' }}
     steps:
-      - name: Deploy Worker to Server B
+      - name: Deploy Worker container to EC2
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_B_IP }}
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "====> Pulling latest repo..."
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
             docker compose -f docker-compose.worker.yml pull
-            docker compose -f docker-compose.worker.yml up -d --no-deps --build
+            docker compose -f docker-compose.worker.yml up -d --no-deps
             echo "✅ Worker deployed successfully!"
 
   # ============================================
-  # DEPLOY BOTH (solo si ambos cambiaron)
+  # DEPLOY AMBOS — SOLO SI AMBAS BUILDS OK
   # ============================================
   deploy-both:
-    name: 🤝 Deploy FastAPI & Worker together
+    name: 🤝 Deploy Both Together
     runs-on: ubuntu-latest
-    needs: [verify-builds]
-    if: ${{ needs.verify-builds.result == 'success' }}
+    needs: [build-fastapi, build-worker]
+    if: |
+      needs.build-fastapi.result == 'success' &&
+      needs.build-worker.result == 'success'
     steps:
-      - name: Deploy both servers in sync
-        run: echo "✅ Both FastAPI & Worker built successfully. Proceeding dual deploy."
+      - name: Deploy FastAPI & Worker together
+        run: echo "✅ Both images built successfully. Proceeding dual deploy (safe)."
