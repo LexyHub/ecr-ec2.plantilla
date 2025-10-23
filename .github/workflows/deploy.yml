@@ -59,7 +59,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build & Push FastAPI image
         run: |
-          
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:latest
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
@@ -84,7 +83,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build & Push Worker image
         run: |
-          
           IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:latest
           docker build -f Dockerfile.worker -t $IMAGE .
           docker push $IMAGE
@@ -103,8 +101,9 @@ jobs:
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_A_IP }}
-          username: root
+          username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
           script: |
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
@@ -124,20 +123,21 @@ jobs:
             echo "✅ FastAPI deployed successfully!"
 
   # ============================================
-  # DEPLOY WORKER
+  # DEPLOY WORKER (SECUENCIAL)
   # ============================================
   deploy-worker:
     name: 🚀 Deploy Worker to EC2
     runs-on: ubuntu-latest
-    needs: [detect-changes, build-worker]
+    needs: [detect-changes, build-worker, deploy-fastapi]  # 👈 ahora depende del deploy-fastapi
     if: ${{ needs.detect-changes.outputs.worker_changed == 'true' }}
     steps:
       - name: Deploy Worker to Server B
         uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_B_IP }}
-          username: root
+          username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
           script: |
             cd /home/ec2-user/ecr-ec2.plantilla
             git pull
@@ -155,17 +155,3 @@ jobs:
             docker compose -f docker-compose.worker.yml up -d --no-deps
 
             echo "✅ Worker deployed successfully!"
-
-  # ============================================
-  # DEPLOY AMBOS — SOLO SI AMBAS BUILDS OK
-  # ============================================
-  deploy-both:
-    name: 🤝 Deploy Both Together
-    runs-on: ubuntu-latest
-    needs: [build-fastapi, build-worker]
-    if: |
-      needs.build-fastapi.result == 'success' &&
-      needs.build-worker.result == 'success'
-    steps:
-      - name: Deploy FastAPI & Worker together
-        run: echo "✅ Both images built successfully. Proceeding dual deploy (safe)."
