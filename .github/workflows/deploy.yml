@@ -59,8 +59,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build & Push FastAPI image
         run: |
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:$COMMIT_HASH
+          
+          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/fastapi:latest
           docker build -f Dockerfile.fastapi -t $IMAGE .
           docker push $IMAGE
           echo "image_fastapi=$IMAGE" >> $GITHUB_ENV
@@ -84,8 +84,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build & Push Worker image
         run: |
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:$COMMIT_HASH
+          
+          IMAGE=${{ steps.login-ecr.outputs.registry }}/lexy/deudor/worker:latest
           docker build -f Dockerfile.worker -t $IMAGE .
           docker push $IMAGE
           echo "image_worker=$IMAGE" >> $GITHUB_ENV

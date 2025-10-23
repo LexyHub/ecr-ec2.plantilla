@@ -28,7 +28,7 @@ def read_root():
 
 @app.get("/test_docker_deploy")
 def docker_deploy():
-    return {"status": "prueba fastapi sola"}
+    return {"status": "prueba fastapi sola 2"}
 
 
 @app.get("/debug/config")
